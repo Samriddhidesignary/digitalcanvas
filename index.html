@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gesture Canvas</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <video id="webcam" autoplay playsinline muted></video>
+      <canvas id="overlay"></canvas>
+
+      <!-- Practice Mode reference outline (hidden unless that mode is active) -->
+      <div id="practiceStage">
+        <canvas id="practiceCanvas"></canvas>
+      </div>
+
+      <canvas id="bloomCanvas"></canvas>
+      <canvas id="drawCanvas"></canvas>
+      <canvas id="particleCanvas"></canvas>
+      <canvas id="handCursorCanvas"></canvas>
+
+      <!-- =====================================================
+           ONBOARDING CARD
+           ===================================================== -->
+      <div id="onboardingCard" class="onboarding-card hidden">
+        <div class="onboarding-glow-ring"></div>
+
+        <h2 class="onboarding-title">Gesture Canvas</h2>
+
+        <div class="onboarding-row">
+          <span class="onboarding-emoji">☝️</span>
+          <span class="onboarding-text"><strong>One Finger</strong> → Draw</span>
+        </div>
+
+        <div class="onboarding-row">
+          <span class="onboarding-emoji">✌️</span>
+          <span class="onboarding-text"><strong>Two Fingers</strong> → Erase</span>
+        </div>
+
+        <div class="onboarding-row">
+          <span class="onboarding-emoji">🖐️</span>
+          <span class="onboarding-text"><strong>Open Hand</strong> → Stop Drawing</span>
+        </div>
+
+        <div class="onboarding-row hover-hint">
+          <span class="onboarding-emoji">🖱️</span>
+          <span class="onboarding-text">Use your mouse or tap to switch modes and adjust all panel controls.</span>
+        </div>
+
+        <button id="onboardingGotIt" class="glow-btn onboarding-cta">Got it</button>
+      </div>
+
+      <!-- =====================================================
+           FLOATING MINIMAL REMINDER
+           ===================================================== -->
+      <div id="miniReminder" class="mini-reminder hidden">
+        <span>☝️ Draw</span>
+        <span class="reminder-sep">·</span>
+        <span>✌️ Erase</span>
+        <span class="reminder-sep">·</span>
+        <span>🖐️ Stop</span>
+      </div>
+
+      <!-- =====================================================
+           PRACTICE MODE: FEEDBACK CARD
+           ===================================================== -->
+      <div id="practiceFeedbackCard" class="onboarding-card feedback-card hidden">
+        <div class="onboarding-glow-ring"></div>
+        <div id="feedbackPercent" class="feedback-percent">94%</div>
+        <p class="feedback-label">Accurate</p>
+        <p id="feedbackMessage" class="feedback-message">Excellent!</p>
+        <div class="completion-actions">
+          <button id="practiceTryAgainBtn" class="glow-btn">↺ Try Again</button>
+          <button id="practiceNextShapeBtn" class="glow-btn onboarding-cta">Next Shape →</button>
+        </div>
+      </div>
+
+      <!-- =====================================================
+           CONTROL PANEL — layout unchanged, styling updated
+           ===================================================== -->
+      <div id="controls">
+        <!-- Mode selector -->
+        <div class="panel-group mode-group">
+          <div class="mode-toggle">
+            <button id="modeFreeBtn" class="mode-btn active" data-mode="free">🎨 Free Draw</button>
+            <button id="modePracticeBtn" class="mode-btn" data-mode="practice">🧠 Practice</button>
+          </div>
+        </div>
+
+        <!-- Practice Mode controls (shape nav + evaluation) -->
+        <div class="panel-group shape-nav hidden" id="practiceNavGroup">
+          <div class="shape-nav-row">
+            <button id="shapePrevBtn" class="glow-btn nav-btn" title="Previous shape">←</button>
+            <span id="shapeNameLabel" class="shape-name">⭕ Circle</span>
+            <button id="shapeNextBtn" class="glow-btn nav-btn" title="Next shape">→</button>
+          </div>
+          <button id="checkDrawingBtn" class="glow-btn check-btn">✓ Check My Drawing</button>
+        </div>
+
+        <div class="panel-group">
+          <button id="clearBtn" class="glow-btn" title="Shortcut: C">🗑 Clear</button>
+          <button id="saveBtn" class="glow-btn" title="Shortcut: S">💾 Save</button>
+        </div>
+
+        <div class="panel-group">
+          <label class="panel-label" for="brushSize">Brush Size</label>
+          <input type="range" id="brushSize" min="1" max="30" value="4" />
+        </div>
+
+        <div class="panel-group" id="colorGroup">
+          <label class="panel-label" for="colorPicker">Color</label>
+          <input type="color" id="colorPicker" value="#00ffff" />
+
+          <div class="swatch-row">
+            <button class="color-swatch" data-color="#00ffff" style="--sw:#00ffff" title="Cyan"></button>
+            <button class="color-swatch" data-color="#ff2ec4" style="--sw:#ff2ec4" title="Pink"></button>
+            <button class="color-swatch" data-color="#39ff14" style="--sw:#39ff14" title="Green"></button>
+            <button class="color-swatch" data-color="#ffdd00" style="--sw:#ffdd00" title="Yellow"></button>
+            <button class="color-swatch" data-color="#ff3b3b" style="--sw:#ff3b3b" title="Red"></button>
+            <button class="color-swatch" data-color="#ffffff" style="--sw:#ffffff" title="White"></button>
+          </div>
+        </div>
+
+        <div class="panel-group toggles">
+          <button id="glowToggle" class="glow-btn toggle">✨ Glow</button>
+          <button id="rainbowToggle" class="glow-btn toggle">🌈 Rainbow</button>
+          <button id="particleToggle" class="glow-btn toggle">💫 Particles</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
